@@ -202,7 +202,7 @@ if __name__ == '__main__':
     Should print:
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
-    # print(graph.vertices)
+    print(graph.vertices)
 
     '''
     Valid BFT paths:
@@ -219,7 +219,7 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    # graph.bft(1)
+    graph.bft(1)
 
     '''
     Valid DFT paths:
@@ -228,19 +228,19 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    # graph.dft(1)
-    # graph.dft_recursive(1)
+    graph.dft(1)
+    graph.dft_recursive(1)
 
     # '''
     # Valid BFS path:
     #     [1, 2, 4, 6]
     # '''
-    # print(graph.bfs(1, 6))
+    print(graph.bfs(1, 6))
 
     # '''
     # Valid DFS paths:
     #     [1, 2, 4, 6]
     #     [1, 2, 4, 7, 6]
     # '''
-    # print(graph.dfs(1, 6))
-    # print(graph.dfs_recursive(1, 6))
+    print(graph.dfs(1, 6))
+    print(graph.dfs_recursive(1, 6))

@@ -30,21 +30,52 @@ class Graph:
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty queue and enqueue the starting vertex id
+        q = Queue()
+        # Create an empty Set to store visited vertices
+        visited = set()
+        # While the queue is not empty...
+        while q.size() > 0:
+            # Dequeue the first vertex
+            v = q.dequeue()
+            # If that vertex has not been visited...
+            if v not in visited:
+                # Mark it as visited
+                print(v)
+                visited.add(v)
+                # Then add all of its neighbors to the back of the queue
+                for neighbor in self.vertices[v]:
+                    q.enqueue(neighbor
+                              )
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty stack and push the starting vertex id
+        s = Stack()
+        # Create an empty Set to store visited vertices
+        visited = set()
+        # While the stack is not empty...
+        while s.size() > 0:
+            # Pop the last vertex
+            v = s.pop()
+            # If that vertex has not been visited...
+            if v not in visited:
+                # Mark it as visited
+                print(v)
+                visited.add(v)
+                # Then add all of its neighbors to the top of the stack
+                for neighbor in self.vertices[v]:
+                    s.push(neighbor)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -62,6 +93,18 @@ class Graph:
         breath-first order.
         """
         pass  # TODO
+        # Create an empty queue and enqueue a PATH to the starting vertex_id
+        # Create a Set to store visited vertices
+        # While the queue is not empty...
+        # > Dequeue the first PATH
+        # > Grab the last vertext from the PATH
+        # > If that vertex has not been visited...
+        # >> CHECK IF IT'S THE TARGET
+        # >>> IF YES, RETURN PATH
+        # >> Mark it as visited
+        # >> Then add a PATH to its neighbors to the back of the queue
+        # >>> COPY THE PATH
+        # >>> APPEND THE NEIGHBOR TO THE BACK
 
     def dfs(self, starting_vertex, destination_vertex):
         """

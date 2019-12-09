@@ -169,9 +169,9 @@ class Graph:
                     if neighbor not in path:
                         copy = path.copy()
                         copy.append(neighbor)
-                        dfs_path = search(copy, visited)
-                        if dfs_path != None:
-                            return dfs_path
+                        cur_path = search(copy, visited)
+                        if cur_path != None:
+                            return cur_path
 
         v = set()
         return search([starting_vertex], v)

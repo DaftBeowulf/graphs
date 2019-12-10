@@ -17,23 +17,30 @@ class Stack():
 
 
 def earliest_ancestor(ancestors, starting_node):
-    # create function to return parents (neighbors) of children
-    # graph will be DIRECTIONAL -- we only want to consider ancestors, so
-    # we will only search upwards through the parental heritage, never searching downward
+    """
+    Returns earlist valid ancestor (lowest value wins tie-breakers) given a list of
+    (parent, child) pairs in ancestors and a starting node
+    """
+
     def get_parents(child):
+        """
+        returns array of parents (neighbors) of child (value)
+        graph will be DIRECTIONAL -- we only want to consider ancestors, so
+        we will only search upwards through the parental heritage, never searching downward
+        """
         return [pair[0] for pair in ancestors if pair[1] == child]
 
     # return -1 if starting node has no parents
     if get_parents(starting_node) == []:
         return -1
 
-    # init visited set and stack with starting node as the initial path being tested
     visited = set()
     s = Stack()
     s.push([starting_node])
 
     # ancestor path will keep track of longest running path
     ancestor_path = []
+
     while s.size() > 0:
         path = s.pop()
         last_child = path[-1]
@@ -53,6 +60,6 @@ def earliest_ancestor(ancestors, starting_node):
     return ancestor_path[-1]
 
 
-test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7),
-                  (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
-print(earliest_ancestor(test_ancestors, 1))
+# test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7),
+#                   (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
+# print(earliest_ancestor(test_ancestors, 1))

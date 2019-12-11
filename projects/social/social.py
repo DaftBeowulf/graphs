@@ -118,20 +118,20 @@ class SocialGraph:
         # While the queue is not empty...
         while q.size() > 0:
             # Dequeue the first path
-            path = q.dequeue()  # [1] // [1, 8]
+            path = q.dequeue()
+
             # If the last friend in the path has not been visited...
-            last_friend = path[-1]  # 1 // 8
+            last_friend = path[-1]
 
             if last_friend not in visited:
                 # Mark it as visited
-                # visited = {1: [1]} // visited = {1: [1], 8: [1, 8]}
                 visited[last_friend] = path
 
-                neighbors = self.friendships[last_friend]  # [8, 10, 5]
+                neighbors = self.friendships[last_friend]
                 for neighbor in neighbors:
-                    copy = path.copy()  # [1] (but a copy)
-                    copy.append(neighbor)  # [1, 8]
-                    q.enqueue(copy)  # Q contains [1,8], [1, 10] and [1,5]
+                    copy = path.copy()
+                    copy.append(neighbor)
+                    q.enqueue(copy)
 
         return visited
 

@@ -148,6 +148,23 @@ class SocialGraph:
                 total_percentage += user_percentage
         return total_percentage / len(self.users) * 100
 
+    def degree_of_separation(self, user):
+        degree_total = 0
+        connections = self.get_all_social_paths(user)
+        for conn in connections:
+            degree_total += len(connections[conn])-1
+        return degree_total / len(connections)-1
+
+    def average_degree_of_separation(self):
+        """
+        Returns the averaged average degree of separation for all 
+        users within their specific network
+        """
+        total_averages = 0
+        for user in self.users:
+            total_averages += self.degree_of_separation(user)
+        return total_averages / len(self.users)
+
 
 if __name__ == '__main__':
     sg = SocialGraph()
@@ -157,3 +174,5 @@ if __name__ == '__main__':
     # print(f"\n{connections}")
     total_connections = sg.average_percentage_of_connections()
     print(f"\n{total_connections}")
+    avg_degrees = sg.average_degree_of_separation()
+    print(f"{avg_degrees}")

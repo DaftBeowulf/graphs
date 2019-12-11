@@ -135,10 +135,25 @@ class SocialGraph:
 
         return visited
 
+    def average_percentage_of_connections(self):
+        """
+        Returns the average percentage of the total user population that is in each user's
+        extended social network
+        """
+        total_percentage = 0
+        for user in self.users:
+            connections = len(self.get_all_social_paths(user))-1
+            if connections > 0:
+                user_percentage = connections / (len(self.users)-1)
+                total_percentage += user_percentage
+        return total_percentage / len(self.users) * 100
+
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 2)
-    print(sg.friendships)
+    sg.populate_graph(1000, 5)
+    # print(sg.friendships)
     connections = sg.get_all_social_paths(1)
-    print(f"\n{connections}")
+    # print(f"\n{connections}")
+    total_connections = sg.average_percentage_of_connections()
+    print(f"\n{total_connections}")

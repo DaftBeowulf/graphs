@@ -1,6 +1,23 @@
 import random
 
 
+class Queue():
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+
+    def size(self):
+        return len(self.queue)
+
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -42,6 +59,11 @@ class SocialGraph:
 
         The number of users must be greater than the average number of friendships.
         """
+
+        # ? Stretch:
+        # If numbers of users is too high, averages and percentages become unrealistic
+        # Tricky part is finding what the cap is.
+
         # Reset graph
         self.last_id = 0
         self.users = {}
@@ -84,8 +106,33 @@ class SocialGraph:
 
         The key is the friend's ID and the value is the path.
         """
+
+        # BFT -- for each connected friend, check to see if friend already in visited
+        # if not, create a key-value pair in visited with friend value as key, path to friend as value
+
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
+
+        # Create an empty queue and enqueue the starting [path]
+        q = Queue()
+        q.enqueue([user_id])  # [1] and not 1
+        # While the queue is not empty...
+        while q.size() > 0:
+            # Dequeue the first path
+            path = q.dequeue()  # [1] // [1, 8]
+            # If the last friend in the path has not been visited...
+            last_friend = path[-1]  # 1 // 8
+
+            if last_friend not in visited:
+                # Mark it as visited
+                # visited = {1: [1]} // visited = {1: [1], 8: [1, 8]}
+                visited[last_friend] = path
+
+                neighbors = self.friendships[last_friend]  # [8, 10, 5]
+                for neighbor in neighbors:
+                    copy = path.copy()  # [1] (but a copy)
+                    copy.append(neighbor)  # [1, 8]
+                    q.enqueue(copy)  # Q contains [1,8], [1, 10] and [1,5]
+
         return visited
 
 
@@ -94,4 +141,4 @@ if __name__ == '__main__':
     sg.populate_graph(10, 2)
     print(sg.friendships)
     connections = sg.get_all_social_paths(1)
-    print(connections)
+    print(f"\n{connections}")
